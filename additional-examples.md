@@ -27,59 +27,55 @@ $$\ddot{x}_0 + \omega_0^2 x_0 = F_0\cos(\Omega t)$$
 **Order ε^1 equation:**
 $$\ddot{x}_1 + \omega_0^2 x_1 = -x_0\dot{x}_0$$
 
-### Step 6: Solve the order ε^0 equation
+## Step 6: Solve the order ε⁰ equation using only the particular solution
+For the forced harmonic oscillator, we'll use just the particular solution:
 
-This is a standard forced harmonic oscillator with solution:
-$$x_0(t) = A\cos(\omega_0 t) + B\sin(\omega_0 t) + \frac{F_0\cos(\Omega t)}{\omega_0^2 - \Omega^2}$$
+x₀(t) = F₀cos(Ωt)/(ω₀² - Ω²)
 
-For simplicity, we'll use initial conditions $x(0) = 0$ and $\dot{x}(0) = 0$.
+Let D = F₀/(ω₀² - Ω²) for brevity: 
+x₀(t) = D·cos(Ωt)
 
-From $x_0(0) = 0$:
-$$A + \frac{F_0}{\omega_0^2 - \Omega^2} = 0 \implies A = -\frac{F_0}{\omega_0^2 - \Omega^2}$$
+## Step 7: Compute ẋ₀(t)
+ẋ₀(t) = -D·Ω·sin(Ωt)
 
-From $\dot{x}_0(0) = 0$:
-$$-\omega_0 A + \omega_0 B - \frac{\Omega F_0\sin(0)}{\omega_0^2 - \Omega^2} = 0 \implies B = \frac{\omega_0 F_0}{\omega_0(\omega_0^2 - \Omega^2)} = \frac{F_0}{\omega_0^2 - \Omega^2}$$
+## Step 8: Calculate x₀(t)·ẋ₀(t) for the order ε¹ equation
+x₀(t)·ẋ₀(t) = D·cos(Ωt)·(-D·Ω·sin(Ωt)) = -D²·Ω·cos(Ωt)·sin(Ωt)
+
+Using the trigonometric identity: cos(a)·sin(a) = sin(2a)/2
+
+x₀(t)·ẋ₀(t) = -D²·Ω·sin(2Ωt)/2
+
+## Step 9: Solve the order ε¹ equation
+ẍ₁ + ω₀²x₁ = -x₀ẋ₀ = D²·Ω·sin(2Ωt)/2
+
+For a forcing term of the form sin(2Ωt), the particular solution has the form:
+x₁ₚ(t) = C·sin(2Ωt)
+
+Substituting into the differential equation:
+-4Ω²C·sin(2Ωt) + ω₀²C·sin(2Ωt) = D²·Ω·sin(2Ωt)/2
+
+Equating coefficients:
+C(ω₀² - 4Ω²) = D²·Ω/2
 
 Therefore:
-$$x_0(t) = -\frac{F_0}{\omega_0^2 - \Omega^2}\cos(\omega_0 t) + \frac{F_0}{\omega_0^2 - \Omega^2}\sin(\omega_0 t) + \frac{F_0\cos(\Omega t)}{\omega_0^2 - \Omega^2}$$
+C = D²·Ω / (2(ω₀² - 4Ω²))
 
-Let $D = \frac{F_0}{\omega_0^2 - \Omega^2}$ for brevity:
-$$x_0(t) = -D\cos(\omega_0 t) + D\sin(\omega_0 t) + D\cos(\Omega t)$$
+And:
+x₁ₚ(t) = D²·Ω·sin(2Ωt) / (2(ω₀² - 4Ω²))
 
-### Step 7: Compute $\dot{x}_0(t)$
-$$\dot{x}_0(t) = D\omega_0\sin(\omega_0 t) + D\omega_0\cos(\omega_0 t) - D\Omega\sin(\Omega t)$$
+Substituting D = F₀/(ω₀² - Ω²):
+x₁ₚ(t) = F₀²·Ω·sin(2Ωt) / (2(ω₀² - Ω²)²(ω₀² - 4Ω²))
 
-### Step 8: Calculate $x_0(t)\dot{x}_0(t)$ for the order ε^1 equation
-$$x_0(t)\dot{x}_0(t) = [-D\cos(\omega_0 t) + D\sin(\omega_0 t) + D\cos(\Omega t)][D\omega_0\sin(\omega_0 t) + D\omega_0\cos(\omega_0 t) - D\Omega\sin(\Omega t)]$$
+## Step 10: Final approximate solution
+x(t) ≈ x₀(t) + εx₁(t)
+    = F₀·cos(Ωt)/(ω₀² - Ω²) + ε·F₀²·Ω·sin(2Ωt)/(2(ω₀² - Ω²)²(ω₀² - 4Ω²))
 
-Expanding this product gives:
-$$x_0(t)\dot{x}_0(t) = D^2\omega_0[-\cos(\omega_0 t)\sin(\omega_0 t) - \cos^2(\omega_0 t) + \sin^2(\omega_0 t) + \sin(\omega_0 t)\cos(\omega_0 t)] + D^2\Omega[\cos(\omega_0 t)\sin(\Omega t) - \sin(\omega_0 t)\sin(\Omega t) - \cos(\Omega t)\sin(\Omega t)]$$
+This gives us a simplified approximate solution to order ε, valid for the steady-state response when:
+1. Ω ≠ ω₀ (to avoid primary resonance)
+2. Ω ≠ ω₀/2 (to avoid secondary resonance)
 
-Using trigonometric identities:
-- $\sin(a)\cos(a) = \frac{\sin(2a)}{2}$
-- $\cos^2(a) = \frac{1+\cos(2a)}{2}$
-- $\sin^2(a) = \frac{1-\cos(2a)}{2}$
-- $\sin(a)\sin(b) = \frac{\cos(a-b)-\cos(a+b)}{2}$
-- $\cos(a)\sin(b) = \frac{\sin(a+b)-\sin(a-b)}{2}$
+The solution shows that the nonlinear term generates a frequency component at 2Ω (twice the forcing frequency), which is a characteristic feature of nonlinear systems.
 
-After extensive algebraic manipulation, we get:
-$$x_0(t)\dot{x}_0(t) = D^2\omega_0 + D^2\omega_0\sin(2\omega_0 t) + D^2\Omega\text{[Combination of sines and cosines with frequencies }(\omega_0 \pm \Omega)\text{ and }2\Omega\text{]}$$
-
-### Step 9: Solve the order ε^1 equation
-$$\ddot{x}_1 + \omega_0^2 x_1 = -x_0\dot{x}_0$$
-
-The particular solution contains terms with frequencies $0$ (constant), $2\omega_0$, $(\omega_0 + \Omega)$, $(\omega_0 - \Omega)$, and $2\Omega$. For each term with frequency $\alpha$, the solution has the form $\frac{c}{\omega_0^2-\alpha^2}\cos(\alpha t)$ or $\frac{c}{\omega_0^2-\alpha^2}\sin(\alpha t)$ where $c$ is the coefficient.
-
-For the constant term $-D^2\omega_0$, the particular solution is $-\frac{D^2\omega_0}{\omega_0^2} = -\frac{D^2}{\omega_0}$.
-
-For terms with frequency $2\omega_0$, $\omega_0 + \Omega$, $\omega_0 - \Omega$, and $2\Omega$, the solutions follow the pattern described above.
-
-The complete solution for $x_1(t)$ is a sum of these particular solutions and the homogeneous solution $C\cos(\omega_0 t) + E\sin(\omega_0 t)$ where $C$ and $E$ are constants determined by initial conditions.
-
-### Step 10: Final approximate solution
-$$x(t) = x_0(t) + \varepsilon x_1(t) + O(\varepsilon^2)$$
-
-This gives us the approximate solution to order $\varepsilon$.
 
 ## Example 4: Oscillator with Rational Nonlinearity
 
